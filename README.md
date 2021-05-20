@@ -40,7 +40,7 @@ services:
 ```
 ## Application Setup
 
-Access the webui at `https://<your-ip>:80`, for more information check out
+Access the webui at `http://<your-ip>:80`, for more information check out
 Below are the instructions for updating containers:
 
 ### Update Container
