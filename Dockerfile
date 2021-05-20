@@ -71,8 +71,9 @@ RUN mkdir -p /usr/src \
 # Setup Run.sh
     && chmod +x /entrypoint.sh \
 # Cleanup
-    && rm -rf /etc/apt/sources.list.d && rm -rf /tmp/* \
-    && apt -y remove --purge wget \
+    && rm -rf /etc/apt/sources.list.d \
+    && rm -rf /tmp/* \
+    && apt -y remove --purge wget unzip \
     && apt autoclean \
     && apt -y autoremove
 
