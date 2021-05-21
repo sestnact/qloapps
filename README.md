@@ -5,7 +5,9 @@ Dockerize Qloapps Hotel Reservation System
 
 For more information see qloapps [website](https://qloapps.com/)
 
-This image need external database see docker-compose section below.
+## Usage
+
+Here are some example to help you get started creating a container this image need external database.
 
 ### docker-compose 
 
