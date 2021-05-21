@@ -23,19 +23,18 @@ services:
     depends_on:
       - db
     volumes:
-      - /path/to/appdata:/var/www/qloapps
+      - /path/to/app-data:/var/www/qloapps
     restart: always
 
   db:
     image: mariadb:latest
     container_name: qloapps-db
     volumes:
-      - /path/to/dbdata:/bitnami/mariadb
+      - /path/to/db-data:/var/lib/mysql
     environment:
       - MARIADB_USER=qloapps_user
       - MARIADB_DATABASE=qloapps
-      - MARIADB_PASSWORD=qloapps #change this for security
-      - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_PASSWORD=qloapps_password #change this for security
     restart: always
 ```
 ## Application Setup
