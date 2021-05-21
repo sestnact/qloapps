@@ -7,7 +7,7 @@ For more information see qloapps [website](https://qloapps.com/)
 
 ## Usage
 
-Here are some example to help you get started creating a container this image need external database.
+Here are some example to help you get started creating a container, this image need external database.
 
 ### docker-compose 
 
@@ -34,15 +34,57 @@ services:
     volumes:
       - /path/to/db-data:/var/lib/mysql
     environment:
+      - MARIADB_ROOT_PASSWORD=root #change this for security reason
       - MARIADB_USER=qloapps_user
       - MARIADB_DATABASE=qloapps
-      - MARIADB_PASSWORD=qloapps_password #change this for security
+      - MARIADB_PASSWORD=qloapps_password #change this for security reason
     restart: always
 ```
 ## Application Setup
 
-Access the webui at `http://<your-ip>:80`, for more information check out
-Below are the instructions for updating containers:
+Better setup domain name first or use nginx proxy manager and access through that domain that is already set.
+
+Access the webui at `http://<your-domain>`, for more information check out below are the instructions for installing qloapps:
+
+### Installation
+
+#### On System configuration section change `Database server address` from `localhost` to `db` 
+* Fill in the database section
+* Database name= `MARIADB_DATABASE`
+* Database login= `MARIADB_USER`
+* Database password= `MARIADB_PASSWORD`
+* Test your database connection if `OK` your good to go 
+
+#### After qloapps installation, remove `install` directory from host `/path/to/app-data/` directory.
+* On host terminal run: `rm -rf /path/to/app-data/install`
+
+#### On clicking backoffice URL, you will be prompted to rename your backoffice URL.
+
+Go to host terminal and change the name of admin directory as mentioned.
+
+* Example: `http://<your-domain>/admin984blk8yu`
+
+* On host terminal run: `mv /path/to/app-data/admin984blk8yu /path/to/app-data/admin-backoffice`
+
+* And then access your `http://<your-domain>/admin-backoffice`
+
+### Additional
+
+#### To prevent admin logout you need to `disable` Check the cookie's IP address.
+
+The configuration is located at: `Administration > Preferences > Check the cookie's IP address` and then disable it.
+
+### SMTP Configuration
+
+The configuration is located at: `Advanced Parameters > E-mail > Select Set my own SMTP parameters`
+
+* Example using gmail smtp:
+* Mail domain name: `leave it blank`
+* SMTP server: `smtp.gmail.com`
+* SMTP username: `username@gmail.com`
+* SMTP password: `username password`
+* Encryption: `TLS`
+* Port: `587`
 
 ### Update Container
 
