@@ -4,6 +4,7 @@ LABEL Maintainer="Sesnact <support@sestnact.com>" \
 
 # Set variable
 ENV PHP_VERSION="7.4"
+ENV APP_VERSION="1.5.2"
 
 # Install packages
 RUN export DEBIAN_FRONTEND=noninteractive \
@@ -48,7 +49,7 @@ COPY include/entrypoint.sh /entrypoint.sh
 # Download Qloapps
 RUN mkdir -p /usr/src \
     && mkdir -p /var/www/qloapps \
-    && wget https://github.com/webkul/hotelcommerce/releases/download/v1.5.1/hotelcommerce.zip \
+    && wget https://github.com/webkul/hotelcommerce/releases/download/${APP_VERSION}/hotelcommerce.zip \
     && unzip hotelcommerce.zip -d /usr/src/ \
     && rm hotelcommerce.zip \
     && mv /usr/src/hotelcommerce /usr/src/qloapps \
