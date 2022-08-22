@@ -4,15 +4,16 @@ LABEL Maintainer="Sesnact <support@sestnact.com>" \
 
 # Set variable
 ENV PHP_VERSION="7.4"
-ENV APP_VERSION="1.5.2"
+ENV APP_VERSION="v1.5.2"
+ENV DEBIAN_FRONTEND noninteractive
+ENV DEBCONF_NONINTERACTIVE_SEEN true
 
 # Install packages
-RUN export DEBIAN_FRONTEND=noninteractive \
-    && apt-get update\
+RUN apt-get update\
     && apt update \
     && apt -y upgrade \
-    && apt -y install software-properties-common wget unzip supervisor \
-    && add-apt-repository ppa:ondrej/php \
+    && apt -y install software-properties-common curl unzip supervisor \
+    && add-apt-repository ppa:ondrej/php -y \
     && apt-get update 
 
 # Install Apache & PHP-FPM
@@ -49,7 +50,7 @@ COPY include/entrypoint.sh /entrypoint.sh
 # Download Qloapps
 RUN mkdir -p /usr/src \
     && mkdir -p /var/www/qloapps \
-    && wget https://github.com/webkul/hotelcommerce/releases/download/${APP_VERSION}/hotelcommerce.zip \
+    && curl -LJO "https://github.com/webkul/hotelcommerce/releases/download/${APP_VERSION}/hotelcommerce.zip" \
     && unzip hotelcommerce.zip -d /usr/src/ \
     && rm hotelcommerce.zip \
     && mv /usr/src/hotelcommerce /usr/src/qloapps \
@@ -74,7 +75,7 @@ RUN mkdir -p /usr/src \
 # Cleanup
     && rm -rf /etc/apt/sources.list.d \
     && rm -rf /tmp/* \
-    && apt -y remove --purge wget unzip \
+    && apt -y remove --purge curl unzip \
     && apt autoclean \
     && apt -y autoremove
 
